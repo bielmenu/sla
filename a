@@ -1,11 +1,25 @@
---[[
-    Thanks for using my HBE script,
-    this script should work for almost any game, however some may use different hit detection methods.
-    If you have any questions, leave a comment or DM realrade0n on Discord.
-    *Note* If you want to add this to your GUI, watch the GUI section in my video on how to do so.
-]]
+local DrRayLibrary = loadstring(game:HttpGet("https://raw.githubusercontent.com/bielmenu/BielMenu/refs/heads/main/Biel%20UI"))()
 
-getgenv().HBE = true -- HBE Variable, use this to control whether the hitboxes are active or not.
+local window = DrRayLibrary:Load("Biel Menu - HitBox", "Default")
+
+local tab1 = DrRayLibrary.newTab("Main", "http://www.roblox.com/asset/?id=6035030083", true)
+
+local hitboxEnabled = false
+local sizebox = 3
+
+tab1.newToggle("HitBox", "Aumentar HitBox De Todos Jogadores", false, function(toggleState)
+	if toggleState then
+		hitboxEnabled = true
+	else
+		hitboxEnabled = false
+	end
+end)
+
+tab1.newSlider("Tamanho", "O Tamanho do Circulo Que Vai Grudar", 3, 3, 25, false, function(num)
+	size = num
+end)
+
+getgenv().HBE = true
 local Players = game:GetService("Players")
 local LocalPlayer = Players.LocalPlayer
 
@@ -37,8 +51,7 @@ end)
 
 
 local CHAR_PARENT = GetCharParent()
-local HITBOX_SIZE = Vector3.new(15,15,15) -- Default size. You can let the user choose with a slider. e.g. HITBOX_SIZE = Vector3.new(Value, Value, Value)
-local HITBOX_COLOUR = Color3.fromRGB(255,0,0) -- Default colour (RGB)
+local HITBOX_COLOUR = Color3.fromRGB(255,0,0)
 
 
 local function AssignHitboxes(player)
@@ -48,8 +61,8 @@ local function AssignHitboxes(player)
 	hitbox_connection = game:GetService("RunService").RenderStepped:Connect(function()
 		local char = CHAR_PARENT:FindFirstChild(player.Name)
 		if getgenv().HBE then
-			if char and char:FindFirstChild("HumanoidRootPart") and (char.HumanoidRootPart.Size ~= HITBOX_SIZE or char.HumanoidRootPart.Color ~= HITBOX_COLOUR) then
-				char.HumanoidRootPart.Size = HITBOX_SIZE
+			if char and char:FindFirstChild("HumanoidRootPart") and (char.HumanoidRootPart.Size ~= Vector3.new(sizebox,sizebox,sizebox) or char.HumanoidRootPart.Color ~= HITBOX_COLOUR) and hitboxEnabled == true then
+				char.HumanoidRootPart.Size = Vector3.new(sizebox,sizebox,sizebox)
 				char.HumanoidRootPart.Color = HITBOX_COLOUR
 				char.HumanoidRootPart.Material = Enum.Material.ForceField
 				char.HumanoidRootPart.CanCollide = false
