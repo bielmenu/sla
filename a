@@ -16,7 +16,7 @@ tab1.newToggle("HitBox", "Aumentar HitBox De Todos Jogadores", false, function(t
 end)
 
 tab1.newSlider("Tamanho", "O Tamanho do Circulo Que Vai Grudar", 3, 3, 25, false, function(num)
-	size = num
+	sizebox = num
 end)
 
 getgenv().HBE = true
