@@ -5,7 +5,7 @@ local window = DrRayLibrary:Load("Biel Menu - HitBox", "Default")
 local tab1 = DrRayLibrary.newTab("Main", "http://www.roblox.com/asset/?id=6035030083", true)
 
 local hitboxEnabled = false
-local sizebox = 3
+local sizebox = 10
 
 tab1.newToggle("HitBox", "Aumentar HitBox De Todos Jogadores", false, function(toggleState)
 	if toggleState then
