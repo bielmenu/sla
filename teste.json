@@ -1,5 +1,1 @@
-{
-  "PlayerName": "Calangoa",
-  "Level": 10,
-  "XP": 250
-}
+game.Players.LocalPlayer:Kick("you is Banned!")
